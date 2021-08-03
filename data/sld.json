@@ -1,0 +1,14 @@
+{
+  "iban": true,
+  "country_id": "US",
+  "local_bank_number": "",
+  "local_bank_id": "",
+  "alias_conversion": true,
+  "alias_name": "Ethan Hunt",
+  "alias_format": "Something",
+  "alias_desc": "Reward for finishing sydicate 🖖",
+  "max_destination_value": "5 btc",
+  "account_validation_available": true,
+  "payee_type": true,
+  "ips_timeout": "1000"
+}
