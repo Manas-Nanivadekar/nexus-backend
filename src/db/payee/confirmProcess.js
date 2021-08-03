@@ -1,4 +1,5 @@
 const connect = require("../connection");
+const { Keyring } = require("@polkadot/keyring");
 
 // Constuct the keyring after the API (crypto has an async init)
 const keyring = new Keyring({ type: "sr25519" });

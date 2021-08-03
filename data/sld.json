@@ -1,8 +1,8 @@
 {
   "iban": true,
   "country_id": "US",
-  "local_bank_number": "",
-  "local_bank_id": "",
+  "local_bank_number": "3759 876543 21001",
+  "local_bank_id": "CHASUS33",
   "alias_conversion": true,
   "alias_name": "Ethan Hunt",
   "alias_format": "Something",

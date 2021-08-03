@@ -1,10 +1,5 @@
 const connect = require("../connection");
-
-// Constuct the keyring after the API (crypto has an async init)
-const keyring = new Keyring({ type: "sr25519" });
-
-// Add Alice to our keyring with a hard-deived path (empty phrase, so uses dev)
-const alice = keyring.addFromUri("//Alice");
+const { Keyring } = require("@polkadot/keyring");
 
 const setInfo = async (
   iban,
@@ -16,6 +11,7 @@ const setInfo = async (
   alias_format,
   alias_desc,
   max_destination_value,
+  account_validation_available,
   payee_type,
   ips_timeout
 ) => {
@@ -31,9 +27,16 @@ const setInfo = async (
     alias_format,
     alias_desc,
     max_destination_value,
+    account_validation_available,
     payee_type,
     ips_timeout
   );
+
+  // Constuct the keyring after the API (crypto has an async init)
+  const keyring = new Keyring({ type: "sr25519" });
+
+  // Add Alice to our keyring with a hard-deived path (empty phrase, so uses dev)
+  const alice = keyring.addFromUri("//Alice");
 
   const hash = await setInfo.signAndSend(alice);
 
