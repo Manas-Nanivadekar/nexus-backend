@@ -1,0 +1,9 @@
+{
+  "uuid": "1",
+  "source_lp": "JPMC",
+  "destination_lp": "SBI",
+  "rate": "100",
+  "public": true,
+  "timestamp": "1627984748",
+  "source_bank_id": "HDFCINBB"
+}
