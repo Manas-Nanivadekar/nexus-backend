@@ -3,7 +3,7 @@ const { setInfo } = require("../../db/sld/setInfo");
 
 const router = express.Router();
 
-router.get("/v1/sld", async (req, res) => {
+router.post("/v1/sld", async (req, res) => {
   const data = req.body;
 
   const hash = await setInfo(
