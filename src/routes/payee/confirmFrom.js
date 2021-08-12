@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/v1/confirmfrom", async (req, res) => {
   const data = req.body;
 
-  const hash = await confirmProcess(data.decision);
+  const hash = await confirmProcess(data.acc_name, data.display_name);
 
   res.status(200).json({
     sucess: true,

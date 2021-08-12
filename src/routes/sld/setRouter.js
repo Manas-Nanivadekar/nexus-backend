@@ -4,11 +4,13 @@ const { setInfo } = require("../../db/sld/setInfo");
 const router = express.Router();
 
 router.post("/v1/sld", async (req, res) => {
+  const countryId = req.query.country_id;
+
   const data = req.body;
 
   const hash = await setInfo(
     data.iban,
-    data.country_id,
+    countryId,
     data.local_bank_number,
     data.local_bank_id,
     data.alias_conversion,
@@ -24,6 +26,7 @@ router.post("/v1/sld", async (req, res) => {
   res.status(200).json({
     sucess: true,
     hash: hash,
+    country: countryId,
     message: "IPS has given data to the blockchain or Local Nexus Gateway",
   });
 });
