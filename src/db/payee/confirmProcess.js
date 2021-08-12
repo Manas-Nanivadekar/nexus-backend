@@ -1,7 +1,7 @@
 const connect = require("../connection");
 const { Keyring } = require("@polkadot/keyring");
 
-const confirmProcess = async (decision) => {
+const confirmProcess = async (acc_name, display_name) => {
   const api = await connect();
 
   // Constuct the keyring after the API (crypto has an async init)
@@ -10,7 +10,10 @@ const confirmProcess = async (decision) => {
   // Add Alice to our keyring with a hard-deived path (empty phrase, so uses dev)
   const alice = keyring.addFromUri("//Alice");
 
-  const confirm = api.tx.nexusApiPayee.confirmSubprocess(decision);
+  const confirm = api.tx.nexusApiPayee.confirmSubprocess(
+    acc_name,
+    display_name
+  );
 
   const hash = await confirm.signAndSend(alice);
 
