@@ -2,7 +2,10 @@ const connect = require("../connection");
 const { Keyring } = require("@polkadot/keyring");
 
 const provideRate = async (
-  uuid,
+  source_currency,
+  destination_currency,
+  quote_uuid,
+  fxp_uuid,
   source_lp,
   destination_lp,
   rate,
@@ -19,7 +22,10 @@ const provideRate = async (
   const alice = keyring.addFromUri("//Alice");
 
   const rateProvider = api.tx.nexusApiQuote.provideRate(
-    uuid,
+    source_currency,
+    destination_currency,
+    quote_uuid,
+    fxp_uuid,
     source_lp,
     destination_lp,
     rate,
