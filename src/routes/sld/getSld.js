@@ -1,26 +1,32 @@
 const express = require("express");
 const connect = require("../../db/connection");
-const { confirmPayee } = require("../../db/payee/confirmPayee");
+const { Keyring } = require("@polkadot/keyring");
+
+const { uuidGenerator } = require("../../../utils/uuidGenerator");
 
 const router = express.Router();
 
-const name = "nexusApiPayee";
+const name = "nexusApiSld";
 
-// TODO: Change all `payment confirmed` to `payee confirmed`
-const method = "PaymentConfirm";
+const method = "OutputSet";
 
-router.post("/v1/confirmto", async (req, res) => {
-  let foo = [];
+router.get("/v1/sld", async (req, res) => {
+  const foo = [];
 
   const api = await connect();
 
-  const data = req.body;
+  const keyring = new Keyring({ type: "sr25519" });
 
-  const hash = await confirmPayee(
-    data.destination_country_id,
-    data.destination_bank_identifier,
-    data.destination_bank_account_number
-  );
+  // Add Alice to our keyring with a hard-deived path (empty phrase, so uses dev)
+  const alice = keyring.addFromUri("//Alice");
+
+  const country_id = req.query.country_id;
+
+  const account_id = req.body.account_id;
+
+  const transfer = api.tx.nexusApiSld.getInfo(country_id, account_id);
+
+  const hash = await transfer.signAndSend(alice);
 
   await api.query.system.events((events) => {
     if (foo.length === 0) {

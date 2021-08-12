@@ -1,9 +1,12 @@
 const express = require("express");
-const sld = require("./routes/sld/setRouter");
-const quote = require("./routes/quote/setRouter");
-const removequote = require("./routes/quote/deleteRouter");
+const setSld = require("./routes/sld/setRouter");
+const getSld = require("./routes/sld/getSld");
+const setQuote = require("./routes/quote/setRouter");
+const getQuote = require("./routes/quote/getQuoteRouter");
+const removeQuote = require("./routes/quote/deleteRouter");
 const confirmdest = require("./routes/payee/confirmFrom");
 const confirmpayee = require("./routes/payee/confirmationTo");
+const finalPayment = require("./routes/finalPayment/setInfo");
 
 const app = express();
 
@@ -16,9 +19,12 @@ function main() {
     console.log(`Server listening on port ${port}`);
   });
 
-  app.use(sld);
-  app.use(quote);
-  app.use(removequote);
+  app.use(setSld);
+  app.use(getSld);
+  app.use(finalPayment);
+  app.use(getQuote);
+  app.use(setQuote);
+  app.use(removeQuote);
   app.use(confirmdest);
   app.use(confirmpayee);
 }
