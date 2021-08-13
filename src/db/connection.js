@@ -1,5 +1,4 @@
 const { ApiPromise, WsProvider } = require("@polkadot/api");
-// const { Text } = require("@polkadot/types");
 
 const socket = process.env.SOCKET || "ws://127.0.0.1:9944";
 
