@@ -32,7 +32,7 @@ router.post("/v1/confirmto", async (req, res) => {
         const eventData = event.data;
 
         if (eventName === name || eventMethod === method) {
-          foo.push(event.data.toString());
+          foo.push(event.data.toHuman());
           res.status(200).json({
             hash: hash,
             event: foo[0],

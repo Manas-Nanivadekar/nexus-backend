@@ -1,9 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 const { setInfo } = require("../../db/sld/setInfo");
 
 const router = express.Router();
 
-router.post("/v1/sld", async (req, res) => {
+router.post("/v1/sld", cors(), async (req, res) => {
   const countryId = req.query.country_id;
 
   const data = req.body;
