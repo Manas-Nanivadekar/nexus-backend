@@ -20,7 +20,7 @@ router.post("/v1/quote", async (req, res) => {
   const hash = await provideRate(
     source_currency,
     destination_currency,
-    "1",
+    quote_uuid,
     fxp_uuid,
     data.source_lp,
     data.destination_lp,
