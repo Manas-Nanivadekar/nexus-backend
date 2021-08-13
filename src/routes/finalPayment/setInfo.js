@@ -21,17 +21,6 @@ router.post("/v1/final", async (req, res) => {
 
   const data = req.body;
 
-  const source_transfer = await bankSourceData(
-    paymentId,
-    data.source_bank_id,
-    data.source_bank_acc_number,
-    data.source_bank_acc_name,
-    data.source_bank_acc_add,
-    data.source_bank_acc_dob,
-    data.source_bank_acc_dop,
-    data.source_bank_acc_national_id
-  );
-
   const final_transfer = await finalInfo(
     messageId,
     time,
@@ -41,6 +30,17 @@ router.post("/v1/final", async (req, res) => {
     data.charge_bearer,
     data.quote_uuid,
     data.ip_source
+  );
+
+  const source_transfer = await bankSourceData(
+    paymentId,
+    data.source_bank_id,
+    data.source_bank_acc_number,
+    data.source_bank_acc_name,
+    data.source_bank_acc_add,
+    data.source_bank_acc_dob,
+    data.source_bank_acc_dop,
+    data.source_bank_acc_national_id
   );
 
   const dest_transfer = await bankDestData(
