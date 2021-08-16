@@ -16,7 +16,6 @@ router.post("/v1/quote", async (req, res) => {
 
   const fxp_uuid = "fxp-" + uuidGenerator();
 
-  /// TODO:- Just for checking purpose uuid has been hard coded to 1
   const hash = await provideRate(
     source_currency,
     destination_currency,

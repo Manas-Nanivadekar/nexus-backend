@@ -16,6 +16,8 @@ router.get("/v1/quote", async (req, res) => {
 
   const keyring = new Keyring({ type: "sr25519" });
 
+  const quoteId = req.param.quote_id;
+
   // Add Alice to our keyring with a hard-deived path (empty phrase, so uses dev)
   const alice = keyring.addFromUri("//Alice");
 
@@ -23,20 +25,17 @@ router.get("/v1/quote", async (req, res) => {
 
   const destination_currency = req.query.destination_currency;
 
-  const uuid = req.query.uuid;
+  const data = req.body;
 
-  /// NOTE: UUID is a hard-coded value, but it WILL be passed in as a query parameter
   const transfer = api.tx.nexusApiQuote.getRate(
     source_currency,
     destination_currency,
-    "1"
+    data.quote_id
   );
   // Sign and send the transaction using our account
   const hash = await transfer.signAndSend(alice);
 
   await api.query.system.events((events) => {
-    // console.log("check");
-    // console.log(foo);
     if (foo.length === 0) {
       events.forEach((record) => {
         const { event } = record;

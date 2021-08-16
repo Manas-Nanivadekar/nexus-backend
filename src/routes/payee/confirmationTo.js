@@ -6,7 +6,6 @@ const router = express.Router();
 
 const name = "nexusApiPayee";
 
-// TODO: Change all `payment confirmed` to `payee confirmed`
 const method = "PaymentConfirm";
 
 router.post("/v1/confirmto", async (req, res) => {

@@ -7,7 +7,7 @@ const { ApiPromise, WsProvider } = require("@polkadot/api");
 
 async function connect() {
   const api = await ApiPromise.create({
-    provider: provider,
+    // provider: provider,
     types: {
       Payee: {
         destinationCountryId: "Text",
