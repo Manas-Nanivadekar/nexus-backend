@@ -22,9 +22,7 @@ router.get("/v1/sld", async (req, res) => {
 
   const country_id = req.query.country_id;
 
-  const account_id = req.body.account_id;
-
-  const transfer = api.tx.nexusApiSld.getInfo(country_id, account_id);
+  const transfer = api.tx.nexusApiSld.getInfo(country_id);
 
   const hash = await transfer.signAndSend(alice);
 
