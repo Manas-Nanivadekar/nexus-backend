@@ -1,9 +1,9 @@
 const { ApiPromise, WsProvider } = require("@polkadot/api");
 
-const socket = process.env.SOCKET;
+// const socket = process.env.SOCKET;
 
 // Initialise the provider to connect to the local node
-const provider = new WsProvider(socket);
+// const provider = new WsProvider(socket);
 
 async function connect() {
   const api = await ApiPromise.create({
