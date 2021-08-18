@@ -1,13 +1,17 @@
 const { ApiPromise, WsProvider } = require("@polkadot/api");
 
-// const socket = process.env.SOCKET;
+require("dotenv").config();
+
+const socket = process.env.SOCKET;
+
+console.log(socket);
 
 // Initialise the provider to connect to the local node
-// const provider = new WsProvider(socket);
+const provider = new WsProvider(socket);
 
 async function connect() {
   const api = await ApiPromise.create({
-    // provider: provider,
+    provider: provider,
     types: {
       Payee: {
         destinationCountryId: "Text",
