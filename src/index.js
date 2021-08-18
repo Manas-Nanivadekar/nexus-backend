@@ -6,7 +6,8 @@ const getQuote = require("./routes/quote/getQuoteRouter");
 const removeQuote = require("./routes/quote/deleteRouter");
 const confirmdest = require("./routes/payee/confirmFrom");
 const confirmpayee = require("./routes/payee/confirmationTo");
-const finalPayment = require("./routes/finalPayment/setInfo");
+const setFinal = require("./routes/finalPayment/setInfo");
+const getFinal = require("./routes/finalPayment/getInfo");
 const logger = require("morgan");
 
 const app = express();
@@ -41,7 +42,8 @@ function main() {
 
   app.use(setSld);
   app.use(getSld);
-  app.use(finalPayment);
+  app.use(setFinal);
+  app.use(getFinal);
   app.use(getQuote);
   app.use(setQuote);
   app.use(removeQuote);
@@ -54,14 +56,14 @@ function main() {
     next(error);
   });
 
-  app.use((req, res, next, error) => {
-    res.status(error.status || 500);
-    res.json({
-      error: {
-        message: error.message,
-      },
-    });
-  });
+  // app.use((req, res, next, error) => {
+  //   res.status(error.status || 500);
+  //   res.json({
+  //     error: {
+  //       message: error.message,
+  //     },
+  //   });
+  // });
 }
 
 main();

@@ -1,5 +1,6 @@
 const express = require("express");
 const connect = require("../../db/connection");
+const { Keyring } = require("@polkadot/keyring");
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.get("/v1/final", async (req, res) => {
 
   const alice = keyring.addFromUri("//Alice");
 
-  const transfer = api.tx.nexusApiFinal.getFinalPayment(data);
+  const transfer = api.tx.nexusApiFinal.getFinalPayment(data.payment_id);
 
   await api.query.system.events((events) => {
     if (foo.length === 0) {
@@ -32,7 +33,6 @@ router.get("/v1/final", async (req, res) => {
         if (eventName === name || eventMethod === method) {
           foo.push(event.data.toHuman());
           res.status(200).json({
-            hash: hash,
             event: foo[0],
           });
         }
