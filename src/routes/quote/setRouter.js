@@ -5,6 +5,8 @@ const { uuidGenerator } = require("../../../utils/uuidGenerator");
 
 const router = express.Router();
 
+const time = new Date().toISOString();
+
 router.post("/v1/quote", async (req, res) => {
   const source_currency = req.query.source_currency;
 
@@ -25,7 +27,7 @@ router.post("/v1/quote", async (req, res) => {
     data.destination_lp,
     data.rate,
     data.public,
-    data.timestamp,
+    time,
     data.source_bank_id
   );
 

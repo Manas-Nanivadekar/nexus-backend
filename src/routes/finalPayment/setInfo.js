@@ -58,7 +58,8 @@ router.post("/v1/final", async (req, res) => {
     destHash: dest_transfer,
     sourceHash: source_transfer,
     finalHash: final_transfer,
-    message: "Success",
+    paymentId: paymentId,
+    message: "Payment message has been uploaded to blockchain/Nexus",
   });
 });
 

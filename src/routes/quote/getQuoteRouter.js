@@ -16,8 +16,6 @@ router.get("/v1/quote", async (req, res) => {
 
   const keyring = new Keyring({ type: "sr25519" });
 
-  const quoteId = req.param.quote_id;
-
   // Add Alice to our keyring with a hard-deived path (empty phrase, so uses dev)
   const alice = keyring.addFromUri("//Alice");
 
