@@ -12,23 +12,23 @@ const method = "RatesRequested";
 
 router.get("/v1/quote", async (req, res) => {
   let foo = [];
+
   const api = await connect();
 
   const keyring = new Keyring({ type: "sr25519" });
 
-  // Add Alice to our keyring with a hard-deived path (empty phrase, so uses dev)
   const alice = keyring.addFromUri("//Alice");
 
   const source_currency = req.query.source_currency;
 
   const destination_currency = req.query.destination_currency;
 
-  const data = req.body;
+  const quote_id = req.body.quote_id;
 
   const transfer = api.tx.nexusApiQuote.getRate(
     source_currency,
     destination_currency,
-    data.quote_id
+    quote_id
   );
   // Sign and send the transaction using our account
   const hash = await transfer.signAndSend(alice);

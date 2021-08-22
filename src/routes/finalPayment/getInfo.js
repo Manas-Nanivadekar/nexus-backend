@@ -11,7 +11,7 @@ const method = "FinalData";
 router.get("/v1/final", async (req, res) => {
   const foo = [];
 
-  const data = req.body;
+  const payment_id = req.body.payment_id;
 
   const api = await connect();
 
@@ -19,7 +19,7 @@ router.get("/v1/final", async (req, res) => {
 
   const alice = keyring.addFromUri("//Alice");
 
-  const transfer = api.tx.nexusApiFinal.getFinalPayment(data.payment_id);
+  const transfer = api.tx.nexusApiFinal.getFinalPayment(payment_id);
 
   await api.query.system.events((events) => {
     if (foo.length === 0) {
