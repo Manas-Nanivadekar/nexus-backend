@@ -2,6 +2,8 @@ const express = require("express");
 const connect = require("../../db/connection");
 const { Keyring } = require("@polkadot/keyring");
 
+const { uuidGenerator } = require("../../../utils/uuidGenerator");
+
 const router = express.Router();
 
 const name = "nexusApiFinal";
@@ -11,15 +13,17 @@ const method = "FinalData";
 router.get("/v1/final", async (req, res) => {
   const foo = [];
 
-  const payment_id = req.body.payment_id;
-
   const api = await connect();
 
-  const keyring = new Keyring({ types: "sr25519" });
+  const keyring = new Keyring({ type: "sr25519" });
 
   const alice = keyring.addFromUri("//Alice");
 
-  const transfer = api.tx.nexusApiFinal.getFinalPayment(payment_id);
+  const payment_id = req.query.payment_id;
+
+  const payment = await api.tx.nexusApiFinal.getFinalPayment(payment_id);
+
+  const hash = await payment.signAndSend(alice);
 
   await api.query.system.events((events) => {
     if (foo.length === 0) {
@@ -33,6 +37,7 @@ router.get("/v1/final", async (req, res) => {
         if (eventName === name || eventMethod === method) {
           foo.push(event.data.toHuman());
           res.status(200).json({
+            hash: hash,
             event: foo[0],
           });
         }
