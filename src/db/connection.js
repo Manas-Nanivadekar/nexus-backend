@@ -4,8 +4,6 @@ require("dotenv").config();
 
 const socket = process.env.SOCKET;
 
-console.log(socket);
-
 // Initialise the provider to connect to the local node
 const provider = new WsProvider(socket);
 
